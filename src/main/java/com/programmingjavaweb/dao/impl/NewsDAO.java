@@ -1,5 +1,6 @@
 package com.programmingjavaweb.dao.impl;
 
+import com.programmingjavaweb.builder.NewsBuilder;
 import com.programmingjavaweb.dao.INewsDAO;
 import com.programmingjavaweb.mapper.NewsMapper;
 import com.programmingjavaweb.model.NewsModel;
@@ -54,7 +55,7 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     }
 
     @Override
-    public List<NewsModel> findAll(Pageble pageble) {
+    public List<NewsModel> findAll(NewsBuilder newsBuilder, Pageble pageble) {
         StringBuilder sql = new StringBuilder("SELECT * FROM news ");
         if(StringUtils.isNotBlank(pageble.getSorter().getSortBy()) && StringUtils.isNotBlank(pageble.getSorter().getSortName())) {
             sql.append(" ORDER BY " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy() + " ");

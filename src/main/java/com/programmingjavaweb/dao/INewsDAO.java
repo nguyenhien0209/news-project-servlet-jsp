@@ -1,5 +1,6 @@
 package com.programmingjavaweb.dao;
 
+import com.programmingjavaweb.builder.NewsBuilder;
 import com.programmingjavaweb.model.NewsModel;
 import com.programmingjavaweb.paging.Pageble;
 
@@ -11,6 +12,6 @@ public interface INewsDAO extends GenericDAO<NewsModel> {
     Long save(NewsModel newsModel);
     void update(NewsModel newNews);
     void delete(Long id);
-    List<NewsModel> findAll(Pageble pageble);
+    List<NewsModel> findAll(NewsBuilder newsBuilder, Pageble pageble);
     int getTotalItem();
 }

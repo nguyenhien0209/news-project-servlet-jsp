@@ -1,5 +1,6 @@
 package com.programmingjavaweb.service.impl;
 
+import com.programmingjavaweb.builder.NewsBuilder;
 import com.programmingjavaweb.dao.ICategoryDAO;
 import com.programmingjavaweb.dao.INewsDAO;
 import com.programmingjavaweb.model.CategoryModel;
@@ -55,8 +56,8 @@ public class NewsService implements INewsService {
     }
 
     @Override
-    public List<NewsModel> findAll(Pageble pageble) {
-        return newsDao.findAll(pageble);
+    public List<NewsModel> findAll(NewsBuilder newsBuilder,Pageble pageble) {
+        return newsDao.findAll(newsBuilder, pageble);
     }
 
     @Override

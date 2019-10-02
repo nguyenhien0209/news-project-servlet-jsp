@@ -1,5 +1,6 @@
 package com.programmingjavaweb.service;
 
+import com.programmingjavaweb.builder.NewsBuilder;
 import com.programmingjavaweb.model.NewsModel;
 import com.programmingjavaweb.paging.Pageble;
 
@@ -10,7 +11,7 @@ public interface INewsService {
     NewsModel save (NewsModel newsModel);
     NewsModel update (NewsModel newsModel);
     void delete(Long[] ids);
-    List<NewsModel> findAll(Pageble pageble);
+    List<NewsModel> findAll(NewsBuilder newsBuilder, Pageble pageble);
     int getTotalItem();
     NewsModel findOne(Long id);
 }

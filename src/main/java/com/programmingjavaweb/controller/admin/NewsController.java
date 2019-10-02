@@ -1,5 +1,6 @@
 package com.programmingjavaweb.controller.admin;
 
+import com.programmingjavaweb.builder.NewsBuilder;
 import com.programmingjavaweb.constant.SystemConstant;
 import com.programmingjavaweb.model.NewsModel;
 import com.programmingjavaweb.paging.PageRequest;
@@ -37,7 +38,10 @@ public class NewsController extends HttpServlet {
         String view = "";
         if(model.getType().equals(SystemConstant.LIST)) {
             Pageble pageable = new PageRequest(model.getPage(), model.getMaxPageItem(), new Sorter(model.getSortName(), model.getSortBy()));
-            model.setListResult(newsService.findAll(pageable));
+            NewsBuilder newsBuilder = new NewsBuilder.Builder().setTitle(model.getTitle())
+                                                                .setCategoryCode(model.getCategoryCode())
+                                                                .setView(model.getView()).build();
+            model.setListResult(newsService.findAll(newsBuilder, pageable));
             model.setTotalItem(newsService.getTotalItem());
             model.setTotalPages((int) Math.ceil((double)model.getTotalItem() / model.getMaxPageItem()));
             view = "/views/admin/news/list.jsp";
