@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.programmingjava</groupId>
+    <artifactId>new-project-jdbc</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+
+    <properties>
+        <!-- Cau hinh de project su dung duoc Java 8 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- Cau hinh version cho mot so library duoc them vao project -->
+        <jsp.api.version>2.0</jsp.api.version>
+        <servlet.api.version>3.1.0</servlet.api.version>
+        <jstl.version>1.2</jstl.version>
+        <sitemesh.version>2.4.2</sitemesh.version>
+        <mysql.version>8.0.13</mysql.version>
+        <weld.servlet.version>1.1.0.Final</weld.servlet.version>
+    </properties>
+
+    <!-- Cau hinh mot de dependencies trong project -->
+    <dependencies>
+
+        <!-- Them thu vien jsp-api thong qua dependency -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp.api.version}</version>
+        </dependency>
+
+        <!-- Them thu vien servlet-api thong qua dependency -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.api.version}</version>
+        </dependency>
+
+        <!-- Them thu vien JSTL -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+        <!-- Them thu vien sitemesh -->
+        <!-- https://mvnrepository.com/artifact/opensymphony/sitemesh -->
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>${sitemesh.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>${weld.servlet.version}</version>
+        </dependency>
+
+        <!-- Add Jackson library-->
+        <!-- json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <!--end json -->
+        <!-- End jackson library-->
+
+        <!--Bean Utils-->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
+    </dependencies>
+
+    <session-config>
+        <!-- Disables URL-based sessions (no more 'jsessionid' in the URL using Tomcat) -->
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!-- Cau hinh de project su dung duoc Java 8 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
