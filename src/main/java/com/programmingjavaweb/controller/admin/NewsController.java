@@ -39,7 +39,7 @@ public class NewsController extends HttpServlet {
             Pageble pageable = new PageRequest(model.getPage(), model.getMaxPageItem(), new Sorter(model.getSortName(), model.getSortBy()));
             model.setListResult(newsService.findAll(pageable));
             model.setTotalItem(newsService.getTotalItem());
-            model.setTotalPages((int) Math.ceil(model.getTotalItem() / model.getMaxPageItem()));
+            model.setTotalPages((int) Math.ceil((double)model.getTotalItem() / model.getMaxPageItem()));
             view = "/views/admin/news/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
             if(model.getId() != null) {

@@ -30,7 +30,50 @@
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <div class="form-horizontal">
-
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Tên bài viết</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="title" name="title" class="form-control" value="${model.title}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Loại bài viết</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="categoryCode" name="categoryCode">
+                                                    <c:if test="${empty model.categoryCode}">
+                                                        <option value="">Chọn loại bài viết</option>
+                                                        <c:forEach var="item" items="${categories}">
+                                                            <option value="${item.code}">${item.name}</option>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${not empty model.categoryCode}">
+                                                        <c:forEach var="item" items="${categories}">
+                                                            <option value="${item.code}"
+                                                                    <c:if test="${item.code == model.categoryCode}">
+                                                                        selected="selected"
+                                                                    </c:if>>
+                                                                    ${item.name}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Lượt xem</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" id="view" name="view" class="form-control" value="${model.view}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right"></label>
+                                            <div class="col-sm-9">
+                                                <button id="btnSearch" type="button" class="btn btn-sm btn-success">
+                                                    Tìm kiếm
+                                                    <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +107,7 @@
                                                 <th><input type="checkbox" class="check-box-element" id="checkAll"></th>
                                                 <th>Tên bài viết</th>
                                                 <th>Mô tả ngắn</th>
+                                                <th>Lượt xem</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
@@ -73,6 +117,7 @@
                                                     <td><input type="checkbox" class="check-box-element" id="checkbox_${item.id}" value="${item.id}"></td>
                                                     <td>${item.title}</td>
                                                     <td>${item.shortDescription}</td>
+                                                    <td>${item.view}</td>
                                                     <td>
                                                         <c:url value="/admin-news" var="editURL">
                                                             <c:param name="type" value="edit" />
@@ -145,6 +190,13 @@
                     window.location.href = "<c:url value='/admin-news?type=list&page=1&maxPageItem=2&message=error_system&alert=danger' />"
                 }
             });
+        });
+        
+        $('#btnSearch').click(function () {
+            $('#maxPageItem').val(limit);
+            $('#page').val(1);
+            $('#type').val("list");
+            $('#formSubmit').submit();
         });
 </script>
 </body>

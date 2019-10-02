@@ -18,6 +18,7 @@ public class NewsMapper implements IRowMapper<NewsModel> {
             news.setThumbnail(resultSet.getString("thumbnail"));
             news.setCreatedDate(resultSet.getTimestamp("createddate"));
             news.setCreatedBy(resultSet.getString("createdby"));
+            news.setView(resultSet.getInt("view"));
             if(resultSet.getTimestamp("modifieddate") != null) {
                 news.setModifiedDate(resultSet.getTimestamp("modifieddate"));
             }

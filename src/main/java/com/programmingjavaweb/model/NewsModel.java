@@ -7,6 +7,15 @@ public class NewsModel extends AbstractModel<NewsModel> {
 	private String content;
 	private Long categoryId;
 	private String categoryCode;
+	private int view;
+
+	public int getView() {
+		return view;
+	}
+
+	public void setView(int view) {
+		this.view = view;
+	}
 
 	public String getCategoryCode() {
 		return categoryCode;

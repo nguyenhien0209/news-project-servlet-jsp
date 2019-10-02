@@ -106,11 +106,6 @@
 
     </dependencies>
 
-    <session-config>
-        <!-- Disables URL-based sessions (no more 'jsessionid' in the URL using Tomcat) -->
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
-
     <!-- Cau hinh de project su dung duoc Java 8 -->
     <build>
         <plugins>
