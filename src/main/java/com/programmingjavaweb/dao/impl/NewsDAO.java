@@ -7,6 +7,7 @@ import com.programmingjavaweb.model.NewsModel;
 import com.programmingjavaweb.paging.Pageble;
 import org.apache.commons.lang.StringUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
@@ -56,7 +57,18 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
 
     @Override
     public List<NewsModel> findAll(NewsBuilder newsBuilder, Pageble pageble) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM news ");
+        StringBuilder sql = new StringBuilder("SELECT * FROM news AS n ");
+        if(StringUtils.isNotBlank(newsBuilder.getCode())) {
+            sql.append(" INNER JOIN category AS c ON n.categoryid = c.id");
+        }
+        sql.append(" WHERE 1=1 ");
+        sql = buildNewsQuery(sql, newsBuilder);
+//        if(StringUtils.isNotBlank(newsBuilder.getTitle())) {
+//            sql.append(" AND LOWER(title) LIKE '%" + newsBuilder.getTitle().toLowerCase() +"%'");
+//        }
+//        if(StringUtils.isNotBlank(newsBuilder.getCode())) {
+//            sql.append(" AND c.code LIKE '%" + newsBuilder.getCode() +"%'");
+//        }
         if(StringUtils.isNotBlank(pageble.getSorter().getSortBy()) && StringUtils.isNotBlank(pageble.getSorter().getSortName())) {
             sql.append(" ORDER BY " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy() + " ");
         }
@@ -67,10 +79,29 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
 
     }
 
+    private StringBuilder buildNewsQuery(StringBuilder sql, NewsBuilder newsBuilder) {
+        Field[] fields = NewsBuilder.class.getDeclaredFields();
+        for(Field field : fields) {
+            String fieldType = field.getType().getName();
+            //String: java.lang.String
+        }
+        return null;
+    }
+
     @Override
-    public int getTotalItem() {
-        String sql = "SELECT count(*) FROM news";
-        return count(sql);
+    public int getTotalItem(NewsBuilder newsBuilder) {
+        StringBuilder sql = new StringBuilder("SELECT count(*) FROM news");
+        if(StringUtils.isNotBlank(newsBuilder.getCode())) {
+            sql.append(" INNER JOIN category AS c ON n.categoryid = c.id");
+        }
+        sql.append(" WHERE 1=1 ");
+        if(StringUtils.isNotBlank(newsBuilder.getTitle())) {
+            sql.append(" AND LOWER(title) LIKE '%" + newsBuilder.getTitle().toLowerCase() +"%'");
+        }
+        if(StringUtils.isNotBlank(newsBuilder.getCode())) {
+            sql.append(" AND c.code LIKE '%" + newsBuilder.getCode() +"%'");
+        }
+        return count(sql.toString());
     }
 
 

@@ -47,6 +47,7 @@
                                                         </c:forEach>
                                                     </c:if>
                                                     <c:if test="${not empty model.categoryCode}">
+                                                        <option value="">Chọn loại bài viết</option>
                                                         <c:forEach var="item" items="${categories}">
                                                             <option value="${item.code}"
                                                                     <c:if test="${item.code == model.categoryCode}">
@@ -59,12 +60,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label no-padding-right">Lượt xem</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" id="view" name="view" class="form-control" value="${model.view}">
-                                            </div>
-                                        </div>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label no-padding-right">Lượt xem</label>--%>
+                                            <%--<div class="col-sm-9">--%>
+                                                <%--<input type="number" id="view" name="view" class="form-control" value="${model.view}">--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label no-padding-right"></label>
                                             <div class="col-sm-9">

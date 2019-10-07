@@ -2,18 +2,26 @@ package com.programmingjavaweb.builder;
 
 public class NewsBuilder {
     private String title;
-    private String categoryCode;
+    private String code;
     private Integer view;
 
     public NewsBuilder(Builder builder) {
         this.title = builder.title;
-        this.categoryCode = builder.categoryCode;
+        this.code = builder.code;
         this.view = builder.view;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public static class Builder {
         private String title;
-        private String categoryCode;
+        private String code;
         private Integer view;
 
         public Builder setTitle(String title) {
@@ -21,8 +29,8 @@ public class NewsBuilder {
             return this;
         }
 
-        public Builder setCategoryCode(String categoryCode) {
-            this.categoryCode = categoryCode;
+        public Builder setCode(String code) {
+            this.code = code;
             return this;
         }
 

@@ -61,8 +61,8 @@ public class NewsService implements INewsService {
     }
 
     @Override
-    public int getTotalItem() {
-        return newsDao.getTotalItem();
+    public int getTotalItem(NewsBuilder newsBuilder) {
+        return newsDao.getTotalItem(newsBuilder);
     }
 
     @Override

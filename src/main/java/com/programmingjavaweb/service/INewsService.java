@@ -12,6 +12,6 @@ public interface INewsService {
     NewsModel update (NewsModel newsModel);
     void delete(Long[] ids);
     List<NewsModel> findAll(NewsBuilder newsBuilder, Pageble pageble);
-    int getTotalItem();
+    int getTotalItem(NewsBuilder newsBuilder);
     NewsModel findOne(Long id);
 }

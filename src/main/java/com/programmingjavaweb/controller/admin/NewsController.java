@@ -39,10 +39,9 @@ public class NewsController extends HttpServlet {
         if(model.getType().equals(SystemConstant.LIST)) {
             Pageble pageable = new PageRequest(model.getPage(), model.getMaxPageItem(), new Sorter(model.getSortName(), model.getSortBy()));
             NewsBuilder newsBuilder = new NewsBuilder.Builder().setTitle(model.getTitle())
-                                                                .setCategoryCode(model.getCategoryCode())
-                                                                .setView(model.getView()).build();
+                                                                .setCode(model.getCategoryCode()).build();
             model.setListResult(newsService.findAll(newsBuilder, pageable));
-            model.setTotalItem(newsService.getTotalItem());
+            model.setTotalItem(newsService.getTotalItem(newsBuilder));
             model.setTotalPages((int) Math.ceil((double)model.getTotalItem() / model.getMaxPageItem()));
             view = "/views/admin/news/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
