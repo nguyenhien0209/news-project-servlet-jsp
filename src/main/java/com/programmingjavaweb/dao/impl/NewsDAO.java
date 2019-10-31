@@ -8,6 +8,8 @@ import com.programmingjavaweb.paging.Pageble;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
@@ -84,8 +86,36 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
         for(Field field : fields) {
             String fieldType = field.getType().getName();
             //String: java.lang.String
+            if(fieldType.equals("java.lang.String")) {
+                String value = getValue(field, String.class, newsBuilder);
+                if(StringUtils.isNotBlank(value)) {
+                    sql.append(" AND LOWER(" + field.getName().toLowerCase() + ") LIKE '%" + value + "%'");
+                }
+            }
         }
-        return null;
+        return sql;
+    }
+
+    private <T> T getValue(Field field, Class<T> type, NewsBuilder newsBuilder) {
+        Object result = null;
+        Method getter = getGetter(field, newsBuilder);
+        if(getter != null ) {
+            try {
+                result = getter.invoke(newsBuilder);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return type.cast(result);
+    }
+
+    private Method getGetter(Field field, NewsBuilder newsBuilder) {
+        String getterName = "get" + StringUtils.capitalize(field.getName());
+        try {
+            return newsBuilder.getClass().getMethod(getterName);
+        } catch (NoSuchMethodException e) {
+            return null;
+        }
     }
 
     @Override
